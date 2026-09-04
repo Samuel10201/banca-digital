@@ -1,0 +1,109 @@
+/* ============================================================================
+   tokens.css — Design tokens del prototipo de banca digital.
+   ES LA UNICA FUENTE de color, tipografia, espaciado, radio y sombra.
+   Ningun otro archivo escribe un valor literal de estos (convenciones.md).
+   La paleta se calca de referencia-ux\Hybrid Mobile UI_ Mallet Toolkit.jpeg.
+   ============================================================================ */
+
+:root {
+  /* ---- Color: acento principal (el morado de la referencia) ---- */
+  --morado-700: #4A31B8;
+  --morado-600: #6C4FE0;
+  --morado-500: #7B61FF;
+  --morado-300: #B9A8FF;
+  --morado-100: #EDE9FE;
+  --morado-050: #F6F3FF;
+
+  /* ---- Color: acentos de apoyo ---- */
+  --naranja-600: #F2603C;
+  --naranja-500: #FF7A59;
+  --naranja-100: #FFE9E1;
+
+  --menta-600: #1EA968;
+  --menta-500: #34C77B;
+  --menta-100: #DFF5EA;
+
+  --amarillo-500: #FFC64D;
+  --amarillo-100: #FFF3D8;
+
+  --azul-500: #4C7DF3;
+  --azul-100: #E3ECFF;
+
+  --rosa-500: #F2789F;
+  --rosa-100: #FFE6EF;
+
+  /* ---- Color: tinta (texto) y superficies ---- */
+  --tinta-900: #14142B;
+  --tinta-700: #262445;
+  --tinta-600: #4E4B66;
+  --tinta-400: #A0A3BD;
+  --tinta-200: #D9DBE9;
+  --linea: #EFF0F6;
+  --papel: #FFFFFF;
+  --fondo: #F7F7FC;
+  --fondo-hueso: #FDF6F1;           /* el crema de las pantallas de onboarding */
+
+  /* ---- Color: semantico ---- */
+  --exito: var(--menta-600);
+  --alerta: var(--amarillo-500);
+  --error: #E2504C;
+  --error-100: #FDE8E7;
+
+  /* ---- Gradientes de las tarjetas de producto ---- */
+  --grad-morado: linear-gradient(135deg, #7B61FF 0%, #4A31B8 100%);
+  --grad-noche: linear-gradient(135deg, #262445 0%, #14142B 100%);
+  --grad-naranja: linear-gradient(135deg, #FF9A6C 0%, #F2603C 100%);
+  --grad-menta: linear-gradient(135deg, #4FDC97 0%, #1EA968 100%);
+
+  /* ---- Tipografia ---- */
+  --fuente: "Segoe UI Variable Display", "Segoe UI", -apple-system,
+            BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fuente-mono: "Cascadia Mono", "Consolas", "SF Mono", Menlo, monospace;
+
+  --txt-display: 30px;
+  --txt-titulo: 22px;
+  --txt-seccion: 17px;
+  --txt-cuerpo: 14px;
+  --txt-menor: 12.5px;
+  --txt-micro: 11px;
+
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-fuerte: 600;
+  --peso-negro: 700;
+
+  /* ---- Espaciado (escala de 4) ---- */
+  --e-1: 4px;
+  --e-2: 8px;
+  --e-3: 12px;
+  --e-4: 16px;
+  --e-5: 20px;
+  --e-6: 24px;
+  --e-8: 32px;
+  --e-10: 40px;
+  --e-12: 48px;
+
+  /* ---- Radios: la esquina muy redondeada es la firma de la referencia ---- */
+  --radio-sm: 10px;
+  --radio-md: 16px;
+  --radio-lg: 22px;
+  --radio-xl: 28px;
+  --radio-pill: 999px;
+
+  /* ---- Sombras: suaves y frias, nunca negras puras ---- */
+  --sombra-sm: 0 2px 8px rgba(20, 20, 43, .05);
+  --sombra-md: 0 6px 20px rgba(20, 20, 43, .07);
+  --sombra-lg: 0 16px 40px rgba(20, 20, 43, .10);
+  --sombra-acento: 0 10px 24px rgba(108, 79, 224, .28);
+
+  /* ---- Transiciones ---- */
+  --paso: 180ms cubic-bezier(.2, .8, .2, 1);
+
+  --alto-cinta: 0px;                /* lo publica navegacion.js al medir la cinta */
+
+  /* ---- Medidas de los canales ---- */
+  --phone-ancho: 390px;
+  --phone-alto: 844px;
+  --pda-ancho: 1024px;
+  --pda-alto: 620px;
+}

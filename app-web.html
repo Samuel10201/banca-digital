@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>app-web — Banca Digital</title>
+  <!--
+    CANAL 2 de 3 — app-web.
+    SHELL: ni una pantalla propia. Carga el mismo motor y el mismo registro que
+    app-phone y app-pda; lo unico propio es canal-web.css.
+    La barra de direcciones muestra la RUTA que declara el § 3.7 del punto 3:
+    es el compromiso con la implementacion, no una etiqueta decorativa.
+  -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/canal-web.css">
+</head>
+<body class="escritorio">
+
+  <aside class="consola" id="consola"></aside>
+
+  <main class="dispositivo dispositivo--web" data-canal="web" data-inicio="inicio">
+
+    <div class="cromo">
+      <span class="cromo__puntos">
+        <span class="cromo__punto"></span><span class="cromo__punto"></span><span class="cromo__punto"></span>
+      </span>
+      <span class="cromo__url">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4.5" y="10" width="15" height="11" rx="2.5"/><path d="M8.5 10V7a3.5 3.5 0 0 1 7 0v3"/></svg>
+        <span class="mono" id="ruta">www.bancodigital.com.co</span>
+      </span>
+      <span class="cromo__acciones">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.5 12a8.5 8.5 0 1 1-2.6-6.1"/><path d="M20.5 3.5V9h-5.5"/></svg>
+      </span>
+    </div>
+
+    <div class="web-marco">
+
+      <nav class="nav nav--web">
+        <div class="marca-web">
+          <span class="marca-web__logo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20z"/></svg>
+          </span>
+          <span class="marca-web__texto">Banca Digital</span>
+        </div>
+        <div id="nav" style="display:flex;flex-direction:column;gap:var(--e-1)"></div>
+      </nav>
+
+      <section class="web-principal">
+        <header class="cabecera" id="cabecera"></header>
+        <div class="cuerpo scroll" id="cuerpo"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="js/datos.js"></script>
+  <script src="js/pantallas.js"></script>
+  <script src="js/navegacion.js"></script>
+  <script>
+    // En escritorio la accion principal es un item mas del menu lateral, no un
+    // boton flotante: el pulgar no manda aqui.
+    document.addEventListener('DOMContentLoaded', function () {
+      montarNavegacion('nav', true);
+      montarConsola('web');
+    });
+  </script>
+</body>
+</html>

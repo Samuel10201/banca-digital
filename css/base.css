@@ -1,0 +1,160 @@
+/* ============================================================================
+   base.css — Reset, tipografia base y utilidades.
+   Se carga despues de tokens.css y antes de componentes.css.
+   ============================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--fuente);
+  font-size: var(--txt-cuerpo);
+  color: var(--tinta-900);
+  background: var(--fondo);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.escritorio {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--e-8) var(--e-4);
+  background:
+    radial-gradient(900px 520px at 12% -8%, var(--morado-100) 0%, transparent 62%),
+    radial-gradient(760px 480px at 92% 4%, var(--naranja-100) 0%, transparent 58%),
+    var(--fondo);
+}
+
+h1, h2, h3, h4, p, figure { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+input, select, textarea { font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+svg { display: block; }
+
+/* ---- Utilidades tipograficas ---- */
+.display   { font-size: var(--txt-display); font-weight: var(--peso-negro); letter-spacing: -.6px; line-height: 1.15; }
+.titulo    { font-size: var(--txt-titulo);  font-weight: var(--peso-negro); letter-spacing: -.3px; line-height: 1.25; }
+.seccion   { font-size: var(--txt-seccion); font-weight: var(--peso-fuerte); letter-spacing: -.2px; }
+.cuerpo    { font-size: var(--txt-cuerpo);  line-height: 1.55; }
+.menor     { font-size: var(--txt-menor);   line-height: 1.5; }
+.micro     { font-size: var(--txt-micro);   line-height: 1.45; }
+.apagado   { color: var(--tinta-600); }
+.tenue     { color: var(--tinta-400); }
+.acento    { color: var(--morado-600); }
+.positivo  { color: var(--menta-600); }
+.negativo  { color: var(--error); }
+.fuerte    { font-weight: var(--peso-fuerte); }
+.negro     { font-weight: var(--peso-negro); }
+.mono      { font-family: var(--fuente-mono); }
+.centrado  { text-align: center; }
+
+/* ---- Utilidades de caja ---- */
+.fila      { display: flex; align-items: center; gap: var(--e-3); }
+.fila--sep { justify-content: space-between; }
+.fila--alto { align-items: flex-start; }
+.columna   { display: flex; flex-direction: column; gap: var(--e-3); }
+.crece     { flex: 1; min-width: 0; }
+.oculto    { display: none !important; }
+
+/* ---- Scrollbar discreto (se ve en las capturas del informe) ---- */
+.scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--tinta-200) transparent; }
+.scroll::-webkit-scrollbar { width: 6px; }
+.scroll::-webkit-scrollbar-thumb { background: var(--tinta-200); border-radius: var(--radio-pill); }
+.scroll::-webkit-scrollbar-track { background: transparent; }
+
+/* ---- Animacion de entrada de pantalla ---- */
+@keyframes entra {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+.anima { animation: entra var(--paso) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anima { animation: none; }
+  * { transition-duration: 1ms !important; }
+}
+
+/* ============================================================================
+   CHROME DEL PROTOTIPO — NO ES PRODUCTO.
+   La consola lateral existe para SUSTENTAR y CAPTURAR: saltar entre canales,
+   entre pantallas y encender la trazabilidad. No forma parte de la solucion
+   propuesta y no aparece en ninguna captura del informe.
+   ============================================================================ */
+.consola {
+  position: fixed;
+  top: var(--e-5);
+  left: var(--e-5);
+  width: 236px;
+  max-height: calc(100vh - var(--e-10));
+  background: rgba(255, 255, 255, .88);
+  backdrop-filter: blur(14px);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-md);
+  padding: var(--e-4);
+  z-index: 90;
+  overflow-y: auto;
+  font-size: var(--txt-menor);
+}
+.consola__titulo {
+  font-size: var(--txt-micro);
+  font-weight: var(--peso-negro);
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--tinta-400);
+  margin-bottom: var(--e-3);
+}
+.consola__grupo { margin-bottom: var(--e-5); }
+.consola__grupo:last-child { margin-bottom: 0; }
+.consola__canales { display: flex; gap: 6px; }
+.consola__canal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--e-3) 4px;
+  border-radius: var(--radio-sm);
+  background: var(--fondo);
+  color: var(--tinta-600);
+  font-size: 10px;
+  font-weight: var(--peso-fuerte);
+  transition: all var(--paso);
+}
+.consola__canal:hover { background: var(--morado-050); color: var(--morado-600); }
+.consola__canal[aria-current="page"] { background: var(--morado-600); color: #fff; }
+.consola__interruptor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--e-3);
+  border-radius: var(--radio-sm);
+  background: var(--fondo);
+  font-weight: var(--peso-medio);
+}
+.consola__interruptor[aria-pressed="true"] { background: var(--tinta-900); color: #fff; }
+.consola__led { width: 9px; height: 9px; border-radius: 50%; background: var(--tinta-200); }
+.consola__interruptor[aria-pressed="true"] .consola__led { background: var(--menta-500); }
+.consola select {
+  width: 100%;
+  padding: var(--e-3);
+  border-radius: var(--radio-sm);
+  border: 0;
+  background: var(--fondo);
+  font-size: var(--txt-menor);
+}
+.consola__pista { color: var(--tinta-400); font-size: 10.5px; line-height: 1.45; margin-top: var(--e-2); }
+
+/* La consola ocupa su propia calle en vez de flotar encima del dispositivo. */
+@media (min-width: 1181px) { body.escritorio:not(.limpio) { padding-left: 292px; } }
+@media (max-width: 1180px) { .consola { display: none; } }
+
+/* ?limpio en la URL: sin consola, sin su calle y sobre papel plano, para que
+   la captura se funda con la pagina del informe en vez de traer su propio
+   fondo degradado recortado en un rectangulo. */
+body.limpio .consola { display: none; }
+body.escritorio.limpio { background: var(--papel); padding: var(--e-6); }

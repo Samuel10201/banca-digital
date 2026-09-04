@@ -1,0 +1,27 @@
+# Este es el repo PUBLICO del prototipo: lo ve el profesor y el grupo.
+# Nada de IA, nada privado y nada local entra aqui.
+
+# --- Todo lo de la IA y del sistema del semestre ---
+CLAUDE.md
+.claude/
+*.md.bak
+
+# --- Secretos ---
+.env
+.env.*
+*.key
+key.txt
+credenciales*
+
+# --- Basura del sistema operativo y de los editores ---
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# --- Salidas locales que no son fuente ---
+capturas-locales/
+*.zip

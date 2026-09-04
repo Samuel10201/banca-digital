@@ -1,0 +1,188 @@
+/* ============================================================================
+   canal-web.css — CANAL 2: navegador de escritorio (app-web).
+   Compone LAS MISMAS pantallas en dos columnas, con navegacion lateral y la
+   ruta del § 3.7 visible en la barra de direcciones. Ni un componente nuevo.
+   ============================================================================ */
+
+/* ------------------------------------------------- Marco del navegador ---- */
+.dispositivo--web {
+  position: relative;
+  width: min(1240px, 96vw);
+  height: min(800px, 90vh);
+  background: var(--papel);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cromo {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+  padding: var(--e-3) var(--e-5);
+  background: var(--linea);
+  flex: none;
+}
+.cromo__puntos { display: flex; gap: 7px; }
+.cromo__punto { width: 11px; height: 11px; border-radius: 50%; background: var(--tinta-200); }
+.cromo__punto:nth-child(1) { background: #FF5F57; }
+.cromo__punto:nth-child(2) { background: #FEBC2E; }
+.cromo__punto:nth-child(3) { background: #28C840; }
+.cromo__url {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+  background: var(--papel);
+  border-radius: var(--radio-pill);
+  padding: 7px var(--e-4);
+  font-size: var(--txt-menor);
+  color: var(--tinta-600);
+  max-width: 620px;
+}
+.cromo__url .mono { color: var(--tinta-900); }
+.cromo__acciones { display: flex; gap: var(--e-3); color: var(--tinta-400); }
+
+/* ------------------------------------------------------------- Estructura - */
+.web-marco {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 248px 1fr;
+  background: var(--fondo);
+}
+
+/* ------------------------------------------------------ Navegacion lateral */
+.nav--web {
+  background: var(--papel);
+  border-right: 1px solid var(--linea);
+  padding: var(--e-6) var(--e-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+  overflow-y: auto;
+}
+.nav--web .nav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  padding: var(--e-3) var(--e-4);
+  border-radius: var(--radio-md);
+  color: var(--tinta-600);
+  font-size: var(--txt-cuerpo);
+  font-weight: var(--peso-medio);
+  transition: all var(--paso);
+  width: 100%;
+  text-align: left;
+}
+.nav--web .nav__item:hover { background: var(--fondo); color: var(--tinta-900); }
+.nav--web .nav__item[aria-current="page"] {
+  background: var(--morado-100);
+  color: var(--morado-700);
+  font-weight: var(--peso-fuerte);
+}
+/* El motor inserta la accion principal en mitad de la lista, que es el patron
+   del telefono. En escritorio va al final del menu: order lo recoloca sin que
+   el motor tenga que saber en que canal esta. */
+.nav--web .nav__item { order: 1; }
+.nav--web .nav__central {
+  order: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-2);
+  margin-top: var(--e-4);
+  padding: var(--e-4);
+  border-radius: var(--radio-pill);
+  background: var(--morado-600);
+  color: #fff;
+  font-weight: var(--peso-fuerte);
+  box-shadow: var(--sombra-acento);
+}
+.nav--web .nav__central::after { content: "Transferir"; font-size: var(--txt-cuerpo); }
+
+.marca-web {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  padding: 0 var(--e-4) var(--e-6);
+}
+.marca-web__logo {
+  width: 36px; height: 36px;
+  border-radius: 12px;
+  background: var(--grad-morado);
+  display: grid; place-items: center;
+  color: #fff;
+}
+.marca-web__texto { font-weight: var(--peso-negro); letter-spacing: -.3px; }
+
+/* --------------------------------------------------------- Area principal - */
+.web-principal { display: flex; flex-direction: column; min-height: 0; }
+
+.dispositivo--web .cabecera {
+  padding: var(--e-5) var(--e-8) var(--e-3);
+  background: var(--fondo);
+  border-bottom: 1px solid var(--linea);
+}
+.dispositivo--web .cabecera__titulo { font-size: var(--txt-seccion); }
+
+/* LA COMPOSICION: dos columnas. Un bloque ocupa el ancho completo salvo que
+   una regla de abajo diga otra cosa. */
+.dispositivo--web .cuerpo {
+  flex: 1;
+  min-height: 0;
+  padding: var(--e-6) var(--e-8) calc(var(--e-10) + var(--alto-cinta));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--e-5) var(--e-6);
+  align-content: start;
+}
+.dispositivo--web .bloque { grid-column: 1 / -1; }
+
+/* Figura e introduccion, lado a lado: es el patron de portada del canal ancho. */
+.dispositivo--web .bloque--figura { grid-column: 1; }
+.dispositivo--web .bloque--figura + .bloque--texto { grid-column: 2; align-self: center; }
+.dispositivo--web .bloque--figura .ilustracion { min-height: 230px; }
+
+/* El formulario reparte sus campos en dos columnas dentro de su propio bloque:
+   asi el canal ancho no obliga a la pantalla a saber que es ancho. */
+.dispositivo--web .bloque--formulario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--e-6);
+}
+.dispositivo--web .bloque--formulario .campo--monto,
+.dispositivo--web .bloque--formulario > .campo:only-child { grid-column: 1 / -1; }
+
+/* Saldo destacado y accesos, lado a lado. */
+.dispositivo--web .bloque--destacado { grid-column: 1; }
+.dispositivo--web .bloque--destacado + .bloque--accesos { grid-column: 2; align-self: center; }
+.dispositivo--web .bloque--accesos .chips { grid-template-columns: repeat(4, 1fr); gap: var(--e-4); }
+
+/* Las secciones se emparejan de dos en dos. */
+.dispositivo--web .bloque--seccion { grid-column: auto; }
+.dispositivo--web .bloque--seccion .tarjeta__cabecera { margin-bottom: var(--e-3); }
+
+/* Las tarjetas de producto en rejilla de tres. */
+.dispositivo--web .bloque--rejilla {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e-5);
+}
+
+/* En web las acciones van a la derecha y NO ocupan el ancho: es el patron de
+   escritorio, no el del pulgar. */
+.dispositivo--web .bloque--acciones { justify-content: flex-end; }
+.dispositivo--web .bloque--acciones .boton { flex: none; min-width: 190px; }
+
+.dispositivo--web .bloque--codigo,
+.dispositivo--web .bloque--centro { justify-self: center; text-align: center; }
+.dispositivo--web .bloque--teclado { display: none; }   /* el escritorio tiene teclado fisico */
+.dispositivo--web .bloque--contrato .tarjeta { max-height: 260px; }
+.dispositivo--web .bloque--pasos { max-width: 520px; }
+.dispositivo--web .bloque--perfil .tarjeta { max-width: 520px; }
+
+/* La cinta de anotacion se ancla al pie del navegador. */
+.dispositivo--web .anotacion__cinta { border-radius: 0 0 var(--radio-lg) var(--radio-lg); }

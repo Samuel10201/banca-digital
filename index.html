@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototipo de la solucion — Banca Digital</title>
+  <!--
+    PORTADA del prototipo (punto 5 del parcial).
+    Las tres tablas de trazabilidad NO estan escritas a mano: se generan del
+    mismo registro que dibuja las pantallas (pantallas.js y datos.js). Si una
+    pantalla cambia de capa o de caso de uso, el mapa cambia con ella y no
+    puede mentir.
+  -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/portada.css">
+</head>
+<body class="portada">
+<div class="hoja">
+
+  <header class="hero">
+    <span class="hero__sello">Punto 5 — Prototipo (Plus)</span>
+    <h1 class="hero__titulo">Prototipo de la plataforma<br>de banca digital</h1>
+    <p class="hero__bajada">
+      Prototipo navegable del <strong>usuario final (externo)</strong> en los tres canales que
+      exige el caso. Las mismas pantallas, tres composiciones: una sola solucion multicanal,
+      no tres aplicaciones distintas.
+    </p>
+    <blockquote class="hero__cita">
+      <strong>Enunciado, punto 5:</strong> <em>"Elabore un prototipo de la solucion, el cual
+      debe estar alineado y ajustado a la arquitectura propuesta (externo)"</em>. Y en el
+      encabezado del caso: <em>"una plataforma digital, la cual debe correr sobre cualquier
+      dispositivo personal (app-phone, app-web, app-pda)"</em>.
+    </blockquote>
+  </header>
+
+  <section class="bloque-portada">
+    <h2 class="bloque-portada__titulo">Los tres canales</h2>
+    <p class="bloque-portada__nota">
+      Cada uno abre con doble clic, sin instalar nada y sin conexion. Dentro de cada canal, la
+      consola de la izquierda salta entre pantallas y enciende el <strong>modo anotado</strong>
+      (Alt+A), que muestra el caso de uso, la capa, la entidad de datos y el actor externo de
+      la pantalla que se este viendo.
+    </p>
+    <div class="bloque-portada__cuerpo">
+      <div class="canales" id="canales"></div>
+    </div>
+  </section>
+
+  <section class="bloque-portada">
+    <h2 class="bloque-portada__titulo">Alineacion con la arquitectura (punto 1)</h2>
+    <p class="bloque-portada__nota">
+      El prototipo <strong>es</strong> la capa de UX y canales de entrega, pero cada pantalla
+      declara ademas la capa que la atiende. Esta es la pila de la Figura 1 con las pantallas
+      del prototipo colocadas en su capa: lo que la rubrica llama estar
+      <em>"alineado y ajustado a la arquitectura propuesta"</em>.
+    </p>
+    <div class="bloque-portada__cuerpo">
+      <div class="capas" id="capas"></div>
+    </div>
+  </section>
+
+  <section class="bloque-portada">
+    <h2 class="bloque-portada__titulo">Trazabilidad con el modelo de casos de uso (punto 3)</h2>
+    <p class="bloque-portada__nota">
+      Los <strong>11 casos de uso principales</strong> son alcanzables desde el inicio, y cada
+      uno dispara sus secundarios. El prototipo no solo los dibuja: <strong>los demuestra</strong>
+      &mdash; un <code>«include»</code> no se puede saltar y un <code>«extend»</code> si.
+    </p>
+    <div class="bloque-portada__cuerpo">
+      <div class="tabla-envoltura">
+        <table class="trazas">
+          <thead>
+            <tr>
+              <th>CU</th><th>Caso de uso principal</th><th>Familia</th>
+              <th>Casos secundarios</th><th>Pantalla</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-casos"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloque-portada">
+    <h2 class="bloque-portada__titulo">Los cinco actores externos, dentro del prototipo</h2>
+    <p class="bloque-portada__nota">
+      Cada sistema que la solucion <em>consume pero no implementa</em> aparece en la pantalla
+      que lo invoca, rotulado como llamada <code>API</code>: es la asociacion del diagrama de
+      casos de uso, hecha visible.
+    </p>
+    <div class="bloque-portada__cuerpo">
+      <div class="externos" id="externos"></div>
+    </div>
+  </section>
+
+  <section class="bloque-portada">
+    <h2 class="bloque-portada__titulo">Lo que este prototipo deja fuera, declarado</h2>
+    <div class="bloque-portada__cuerpo">
+      <div class="fuera">
+        <div class="fuera__item">
+          <strong>El usuario interno y el administrador</strong>
+          Los excluye la propia rubrica del punto 3 (<em>"la experiencia del usuario final
+          -unicamente-"</em>) y el punto 5 (<em>"externo"</em>). BackOffice, trazabilidad y
+          administracion pertenecen al modelo de requerimientos.
+        </div>
+        <div class="fuera__item">
+          <strong>El back real</strong>
+          No hay servidor, base de datos ni API: es un prototipo de UX. Los microservicios,
+          el bus de eventos y el OLTP quedan <em>modelados</em> en el punto 1 y se construyen
+          en los siete <em>sprints</em> del plan del punto 4.
+        </div>
+        <div class="fuera__item">
+          <strong>La analitica</strong>
+          El Data Warehouse, el Data Lake y los modelos de ML estan en la capa de datos de la
+          arquitectura pero no se desarrollan aqui: son la segunda fase declarada en el
+          alcance del punto 1.
+        </div>
+        <div class="fuera__item">
+          <strong>El perfil personal en app-pda</strong>
+          El terminal es un punto de atencion presencial y compartido: no expone la
+          configuracion personal del cliente. Es una decision de canal, no un olvido.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pie-portada">
+    <strong>Parcial 1 &mdash; Una compañia financiera Fintech, banca digital.</strong><br>
+    Diseño de Software I &mdash; NRC 2429 &mdash; Universidad del Norte &mdash; 3 de septiembre de 2026.<br>
+    Prototipo en HTML5, CSS y JavaScript, sin dependencias externas, segun las tecnologias que
+    la propia arquitectura recomienda para la capa de UX y canales de entrega.
+  </footer>
+
+</div>
+
+<script src="js/datos.js"></script>
+<script src="js/pantallas.js"></script>
+<script>
+  /* ------------------------------------------------------------ Canales -- */
+  const CANALES = [
+    { archivo: 'app-phone.html', icono: 'telefono', nombre: 'app-phone', tono: 'morado',
+      que: 'Telefono personal, 390x844. Una columna, navegacion inferior con boton central y las acciones ancladas en la zona del pulgar. Es el canal de la referencia de UX.' },
+    { archivo: 'app-web.html', icono: 'monitor', nombre: 'app-web', tono: 'azul',
+      que: 'Navegador de escritorio. Dos columnas, menu lateral y la ruta del &sect; 3.7 literal en la barra de direcciones. Los formularios reparten sus campos solos.' },
+    { archivo: 'app-pda.html', icono: 'terminal', nombre: 'app-pda', tono: 'naranja',
+      que: 'Terminal dedicado apaisado, 1024x600, en corresponsal u oficina. Se opera de pie y con el dedo: todo objetivo tactil crece y baja la densidad por pantalla.' }
+  ];
+
+  document.getElementById('canales').innerHTML = CANALES.map(c => `
+    <a class="canal-tarjeta" href="${c.archivo}">
+      <span class="canal-tarjeta__icono tono--${c.tono}">${ico(c.icono, 26)}</span>
+      <div class="canal-tarjeta__nombre">${c.nombre}</div>
+      <p class="canal-tarjeta__que">${c.que}</p>
+      <span class="canal-tarjeta__abrir">Abrir el canal ${ico('flecha', 15)}</span>
+    </a>`).join('');
+
+  /* -------------------------------------------------------------- Capas -- */
+  /* Se agrupan las pantallas por la capa que cada una DECLARA. El mapa sale
+     del registro, no de una lista paralela que podria desactualizarse. */
+  const porCapa = {};
+  Object.keys(PANTALLAS).forEach(function (id) {
+    const p = PANTALLAS[id];
+    (porCapa[p.capa] = porCapa[p.capa] || []).push({ id: id, titulo: p.titulo });
+  });
+
+  function pastillas(clave) {
+    const lista = porCapa[clave];
+    if (!lista) { return '<span class="pastilla pastilla--vacia">sin pantalla: se modela, no se prototipa</span>'; }
+    return lista.map(p => `<a class="pastilla" href="app-phone.html#${p.id}">${p.titulo}</a>`).join('');
+  }
+
+  const PILA = ['negocio', 'ux', 'logica', 'apps', 'datos', 'infra'];
+  document.getElementById('capas').innerHTML = `
+    <div class="capa-vertical">
+      <div class="capa__nombre">${CAPAS.ciber}</div>
+      <div class="capa__pantallas">${pastillas('ciber')}</div>
+    </div>
+    <div class="capa-pila">
+      ${PILA.map(k => `
+        <div class="capa">
+          <div class="capa__nombre">${CAPAS[k]}</div>
+          <div class="capa__pantallas">${pastillas(k)}</div>
+        </div>`).join('')}
+    </div>
+    <div class="capa-vertical capa-vertical--privacidad">
+      <div class="capa__nombre">${CAPAS.privacidad}</div>
+      <div class="capa__pantallas">${pastillas('privacidad')}</div>
+    </div>`;
+
+  /* ------------------------------------------------------ Casos de uso --- */
+  document.getElementById('tabla-casos').innerHTML = CASOS.map(c => `
+    <tr>
+      <td class="celda-cu">${c.id}</td>
+      <td><strong>${c.nombre}</strong></td>
+      <td>${c.familia}</td>
+      <td>
+        <span class="celda-secundarios">
+          ${c.secundarios.map(s => `
+            <span><span class="etiqueta etiqueta--${s.e}">${s.e}</span> ${s.n}</span>`).join('')}
+        </span>
+      </td>
+      <td><a class="pastilla" href="app-phone.html#${c.pantalla}">Abrir ${ico('flecha', 13)}</a></td>
+    </tr>`).join('');
+
+  /* --------------------------------------------------- Actores externos -- */
+  /* Cada actor se empareja con la pantalla que lo invoca, leida del registro. */
+  const invocaciones = {};
+  Object.keys(PANTALLAS).forEach(function (id) {
+    const p = PANTALLAS[id];
+    if (p.externo) { invocaciones[p.externo] = { id: id, titulo: p.titulo, caso: p.caso }; }
+  });
+
+  document.getElementById('externos').innerHTML = Object.keys(ACTORES_EXTERNOS).map(function (k) {
+    const inv = invocaciones[k];
+    return `
+      <div class="externo">
+        <div class="externo__nombre">${ACTORES_EXTERNOS[k]}</div>
+        <div class="externo__donde">
+          ${inv ? `Se invoca en <a class="acento fuerte" href="app-phone.html#${inv.id}">${inv.titulo}</a><br>${inv.caso}`
+                : 'Sin pantalla que lo invoque'}
+        </div>
+      </div>`;
+  }).join('');
+</script>
+</body>
+</html>

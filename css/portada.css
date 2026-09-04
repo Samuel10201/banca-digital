@@ -1,0 +1,163 @@
+/* ============================================================================
+   portada.css — Composicion de index.html (la portada del prototipo).
+   NO es un canal: es el mapa que abre el prototipo y prueba su trazabilidad.
+   ============================================================================ */
+
+body.portada {
+  display: block;
+  padding: 0;
+  background:
+    radial-gradient(1000px 560px at 8% -10%, var(--morado-100) 0%, transparent 60%),
+    radial-gradient(820px 520px at 96% 2%, var(--naranja-100) 0%, transparent 56%),
+    var(--fondo);
+}
+
+.hoja { max-width: 1120px; margin: 0 auto; padding: var(--e-12) var(--e-6) var(--e-12); }
+
+/* ------------------------------------------------------------------ Hero - */
+.hero { margin-bottom: var(--e-12); }
+.hero__sello {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  padding: 6px 14px;
+  border-radius: var(--radio-pill);
+  background: var(--morado-100);
+  color: var(--morado-700);
+  font-size: var(--txt-micro);
+  font-weight: var(--peso-negro);
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  margin-bottom: var(--e-5);
+}
+.hero__titulo { font-size: 44px; font-weight: var(--peso-negro); letter-spacing: -1.2px; line-height: 1.08; }
+.hero__bajada { max-width: 720px; margin-top: var(--e-4); font-size: var(--txt-seccion); color: var(--tinta-600); line-height: 1.55; }
+.hero__cita {
+  margin-top: var(--e-6);
+  padding: var(--e-4) var(--e-5);
+  border-left: 4px solid var(--morado-500);
+  background: var(--papel);
+  border-radius: 0 var(--radio-md) var(--radio-md) 0;
+  font-size: var(--txt-menor);
+  color: var(--tinta-600);
+  max-width: 760px;
+  box-shadow: var(--sombra-sm);
+}
+
+/* --------------------------------------------------------------- Bloques - */
+.bloque-portada { margin-bottom: var(--e-12); }
+.bloque-portada__titulo { font-size: var(--txt-titulo); font-weight: var(--peso-negro); letter-spacing: -.4px; }
+.bloque-portada__nota { margin-top: var(--e-2); color: var(--tinta-600); font-size: var(--txt-cuerpo); max-width: 780px; line-height: 1.6; }
+.bloque-portada__cuerpo { margin-top: var(--e-6); }
+
+/* -------------------------------------------------------------- Canales -- */
+.canales { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--e-5); }
+.canal-tarjeta {
+  display: block;
+  background: var(--papel);
+  border-radius: var(--radio-xl);
+  padding: var(--e-6);
+  box-shadow: var(--sombra-sm);
+  transition: transform var(--paso), box-shadow var(--paso);
+}
+.canal-tarjeta:hover { transform: translateY(-4px); box-shadow: var(--sombra-lg); }
+.canal-tarjeta__icono {
+  width: 56px; height: 56px;
+  border-radius: 19px;
+  display: grid; place-items: center;
+  margin-bottom: var(--e-5);
+}
+.canal-tarjeta__nombre { font-size: var(--txt-seccion); font-weight: var(--peso-negro); font-family: var(--fuente-mono); }
+.canal-tarjeta__que { margin-top: var(--e-2); color: var(--tinta-600); font-size: var(--txt-menor); line-height: 1.55; }
+.canal-tarjeta__abrir { margin-top: var(--e-5); display: inline-flex; align-items: center; gap: 6px; color: var(--morado-600); font-weight: var(--peso-fuerte); font-size: var(--txt-menor); }
+
+/* ---------------------------------------------------------------- Capas -- */
+.capas { display: grid; grid-template-columns: 210px 1fr 210px; gap: var(--e-4); align-items: stretch; }
+.capa-vertical {
+  background: var(--papel);
+  border-radius: var(--radio-lg);
+  padding: var(--e-5);
+  box-shadow: inset 0 0 0 2px var(--rosa-100);
+  display: flex; flex-direction: column; justify-content: center; gap: var(--e-3);
+}
+.capa-vertical--privacidad { box-shadow: inset 0 0 0 2px var(--menta-100); }
+.capa-pila { display: flex; flex-direction: column; gap: var(--e-3); }
+.capa {
+  background: var(--papel);
+  border-radius: var(--radio-md);
+  padding: var(--e-4) var(--e-5);
+  box-shadow: var(--sombra-sm);
+}
+.capa__nombre { font-size: var(--txt-menor); font-weight: var(--peso-negro); text-transform: uppercase; letter-spacing: .5px; color: var(--tinta-400); }
+.capa__pantallas { margin-top: var(--e-3); display: flex; flex-wrap: wrap; gap: 6px; }
+.pastilla {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px;
+  border-radius: var(--radio-pill);
+  background: var(--fondo);
+  font-size: var(--txt-micro);
+  font-weight: var(--peso-medio);
+  color: var(--tinta-600);
+  transition: all var(--paso);
+}
+.pastilla:hover { background: var(--morado-100); color: var(--morado-700); }
+.pastilla--vacia { color: var(--tinta-400); font-style: italic; }
+
+/* ---------------------------------------------------------------- Tabla -- */
+.tabla-envoltura { overflow-x: auto; border-radius: var(--radio-lg); box-shadow: var(--sombra-sm); background: var(--papel); }
+table.trazas { width: 100%; border-collapse: collapse; font-size: var(--txt-menor); min-width: 760px; }
+table.trazas th {
+  text-align: left;
+  padding: var(--e-4) var(--e-5);
+  background: var(--tinta-900);
+  color: #fff;
+  font-size: var(--txt-micro);
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  font-weight: var(--peso-fuerte);
+  white-space: nowrap;
+}
+table.trazas td { padding: var(--e-4) var(--e-5); border-bottom: 1px solid var(--linea); vertical-align: top; }
+table.trazas tr:last-child td { border-bottom: 0; }
+table.trazas tr:hover td { background: var(--morado-050); }
+.celda-cu { font-family: var(--fuente-mono); font-weight: var(--peso-negro); color: var(--morado-600); white-space: nowrap; }
+.celda-secundarios { display: flex; flex-direction: column; gap: 6px; }
+.celda-secundarios span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* -------------------------------------------------------------- Externos - */
+.externos { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--e-4); }
+.externo {
+  background: var(--papel);
+  border-radius: var(--radio-lg);
+  padding: var(--e-5);
+  box-shadow: var(--sombra-sm);
+  border-top: 3px solid var(--naranja-500);
+}
+.externo__nombre { font-weight: var(--peso-fuerte); font-size: var(--txt-cuerpo); }
+.externo__donde { margin-top: 6px; font-size: var(--txt-micro); color: var(--tinta-400); }
+
+/* ---------------------------------------------------------------- Fuera -- */
+.fuera { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--e-4); }
+.fuera__item {
+  background: var(--papel);
+  border-radius: var(--radio-lg);
+  padding: var(--e-5);
+  box-shadow: var(--sombra-sm);
+  border-left: 3px solid var(--tinta-200);
+}
+.fuera__item strong { display: block; margin-bottom: 6px; }
+
+.pie-portada {
+  margin-top: var(--e-12);
+  padding-top: var(--e-6);
+  border-top: 1px solid var(--tinta-200);
+  color: var(--tinta-400);
+  font-size: var(--txt-menor);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .canales { grid-template-columns: 1fr; }
+  .capas { grid-template-columns: 1fr; }
+  .hero__titulo { font-size: 32px; }
+}

@@ -1,0 +1,416 @@
+/* ============================================================================
+   componentes.css — El catalogo de componentes del sistema de diseño.
+   Son IDENTICOS en los tres canales: lo que cambia por canal es la COMPOSICION
+   (canal-*.css), nunca la pieza. Eso es lo que hace que app-phone, app-web y
+   app-pda sean una sola solucion multicanal y no tres aplicaciones distintas.
+   ============================================================================ */
+
+/* ---------------------------------------------------------------- Boton --- */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-2);
+  padding: 14px var(--e-6);
+  border-radius: var(--radio-pill);
+  font-size: var(--txt-cuerpo);
+  font-weight: var(--peso-fuerte);
+  transition: transform var(--paso), box-shadow var(--paso), background var(--paso);
+  white-space: nowrap;
+}
+.boton:active { transform: translateY(1px) scale(.99); }
+.boton--principal {
+  background: var(--morado-600);
+  color: #fff;
+  box-shadow: var(--sombra-acento);
+}
+.boton--principal:hover { background: var(--morado-500); }
+.boton--secundario {
+  background: var(--morado-100);
+  color: var(--morado-700);
+}
+.boton--secundario:hover { background: var(--morado-050); }
+.boton--fantasma {
+  background: transparent;
+  color: var(--tinta-600);
+  box-shadow: inset 0 0 0 1.5px var(--tinta-200);
+}
+.boton--fantasma:hover { color: var(--tinta-900); box-shadow: inset 0 0 0 1.5px var(--tinta-400); }
+.boton--peligro { background: var(--error-100); color: var(--error); }
+.boton--bloque { width: 100%; }
+.boton--grande { padding: 18px var(--e-8); font-size: var(--txt-seccion); }
+.boton__flecha { font-size: 16px; line-height: 1; }
+
+/* Fila de acciones al pie de una pantalla */
+.acciones { display: flex; gap: var(--e-3); }
+.acciones .boton { flex: 1; }
+
+/* --------------------------------------------------------------- Tarjeta -- */
+.tarjeta {
+  background: var(--papel);
+  border-radius: var(--radio-lg);
+  padding: var(--e-5);
+  box-shadow: var(--sombra-sm);
+}
+.tarjeta--plana { box-shadow: none; background: var(--fondo); }
+.tarjeta--contorno { box-shadow: inset 0 0 0 1.5px var(--linea); }
+.tarjeta__cabecera { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--e-4); }
+.tarjeta__titulo { font-size: var(--txt-seccion); font-weight: var(--peso-fuerte); }
+
+/* -------------------------------------------------- Tarjeta de producto --- */
+/* La tarjeta bancaria con gradiente de la referencia. */
+.producto {
+  position: relative;
+  border-radius: var(--radio-xl);
+  padding: var(--e-5);
+  color: #fff;
+  overflow: hidden;
+  box-shadow: var(--sombra-md);
+  min-height: 168px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.producto--morado { background: var(--grad-morado); }
+.producto--noche  { background: var(--grad-noche); }
+.producto--naranja{ background: var(--grad-naranja); }
+.producto--menta  { background: var(--grad-menta); }
+.producto::after {
+  content: "";
+  position: absolute;
+  width: 210px; height: 210px;
+  right: -70px; top: -90px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .12);
+}
+.producto::before {
+  content: "";
+  position: absolute;
+  width: 140px; height: 140px;
+  right: 20px; bottom: -80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .08);
+}
+.producto__etiqueta { font-size: var(--txt-menor); opacity: .78; position: relative; z-index: 1; }
+.producto__saldo { font-size: 27px; font-weight: var(--peso-negro); letter-spacing: -.5px; position: relative; z-index: 1; }
+.producto__pie { display: flex; align-items: flex-end; justify-content: space-between; position: relative; z-index: 1; }
+.producto__numero { font-family: var(--fuente-mono); font-size: var(--txt-menor); opacity: .85; letter-spacing: 1px; }
+
+/* ------------------------------------------------------ Campos de entrada -- */
+.campo { display: block; margin-bottom: var(--e-4); }
+.campo__etiqueta {
+  display: block;
+  font-size: var(--txt-menor);
+  font-weight: var(--peso-medio);
+  color: var(--tinta-600);
+  margin-bottom: var(--e-2);
+}
+.campo__caja {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  background: var(--papel);
+  border-radius: var(--radio-md);
+  padding: 14px var(--e-4);
+  box-shadow: inset 0 0 0 1.5px var(--linea);
+  transition: box-shadow var(--paso);
+}
+.campo__caja:focus-within { box-shadow: inset 0 0 0 1.5px var(--morado-500); }
+.campo__caja input,
+.campo__caja select {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: var(--txt-cuerpo);
+}
+.campo__caja input::placeholder { color: var(--tinta-400); }
+.campo__pista { display: block; margin-top: 6px; font-size: var(--txt-micro); color: var(--tinta-400); }
+.campo--monto .campo__caja { padding: var(--e-4); }
+.campo--monto input { font-size: var(--txt-titulo); font-weight: var(--peso-negro); letter-spacing: -.4px; }
+.campo__moneda { font-size: var(--txt-titulo); font-weight: var(--peso-negro); color: var(--tinta-400); }
+
+/* Opciones tipo segmented control (plazo, perfil, tipo de cuenta) */
+.opciones { display: flex; gap: var(--e-2); flex-wrap: wrap; }
+.opcion {
+  flex: 1;
+  min-width: 92px;
+  text-align: center;
+  padding: var(--e-3) var(--e-3);
+  border-radius: var(--radio-md);
+  background: var(--papel);
+  box-shadow: inset 0 0 0 1.5px var(--linea);
+  font-size: var(--txt-menor);
+  font-weight: var(--peso-medio);
+  color: var(--tinta-600);
+  transition: all var(--paso);
+}
+.opcion:hover { box-shadow: inset 0 0 0 1.5px var(--morado-300); }
+.opcion[aria-selected="true"] {
+  background: var(--morado-600);
+  color: #fff;
+  box-shadow: var(--sombra-acento);
+}
+.opcion__sub { display: block; font-size: var(--txt-micro); opacity: .72; margin-top: 2px; font-weight: var(--peso-normal); }
+
+/* Casilla de aceptacion (contratos) */
+.casilla { display: flex; gap: var(--e-3); align-items: flex-start; cursor: pointer; }
+.casilla__marca {
+  flex: none;
+  width: 22px; height: 22px;
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1.5px var(--tinta-200);
+  display: grid; place-items: center;
+  transition: all var(--paso);
+  margin-top: 1px;
+}
+.casilla[aria-checked="true"] .casilla__marca { background: var(--morado-600); box-shadow: none; }
+.casilla__marca svg { opacity: 0; }
+.casilla[aria-checked="true"] .casilla__marca svg { opacity: 1; }
+
+/* --------------------------------------------------------------- Chips ---- */
+/* La rejilla de accesos con icono en cuadrado pastel de la referencia. */
+.chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--e-3); }
+.chip { display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; }
+.chip__icono {
+  width: 52px; height: 52px;
+  border-radius: 17px;
+  display: grid; place-items: center;
+  transition: transform var(--paso);
+}
+.chip:hover .chip__icono { transform: translateY(-3px); }
+.chip__texto { font-size: var(--txt-micro); color: var(--tinta-600); font-weight: var(--peso-medio); line-height: 1.25; }
+.tono--morado  { background: var(--morado-100); color: var(--morado-600); }
+.tono--naranja { background: var(--naranja-100); color: var(--naranja-600); }
+.tono--menta   { background: var(--menta-100);  color: var(--menta-600); }
+.tono--azul    { background: var(--azul-100);   color: var(--azul-500); }
+.tono--amarillo{ background: var(--amarillo-100); color: #B57F00; }
+.tono--rosa    { background: var(--rosa-100);   color: #C2185B; }
+
+/* --------------------------------------------------------------- Listas --- */
+.lista { display: flex; flex-direction: column; }
+.lista__item {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  padding: var(--e-3) 0;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid var(--linea);
+}
+.lista__item:last-child { border-bottom: 0; }
+.lista__icono { flex: none; width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; }
+/* Los tres son <span> en el HTML: sin display:block el subtitulo se pega a la
+   misma linea del titulo en cuanto el texto es corto. */
+.lista__cuerpo { display: block; flex: 1; min-width: 0; }
+.lista__titulo { display: block; font-size: var(--txt-cuerpo); font-weight: var(--peso-medio); }
+.lista__sub { display: block; font-size: var(--txt-micro); color: var(--tinta-400); margin-top: 2px; }
+.lista__valor { font-size: var(--txt-cuerpo); font-weight: var(--peso-fuerte); text-align: right; white-space: nowrap; }
+
+/* ------------------------------------------------------------ Ilustracion - */
+/* Escenas planas SVG: el aire de la referencia sin depender de imagenes. */
+.ilustracion {
+  border-radius: var(--radio-xl);
+  padding: var(--e-5);
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+}
+.ilustracion--hueso { background: var(--fondo-hueso); }
+.ilustracion--lila  { background: var(--morado-050); }
+.ilustracion--menta { background: var(--menta-100); }
+.ilustracion svg { width: 100%; max-width: 240px; height: auto; }
+
+/* ------------------------------------------------------------- Avisos ----- */
+.aviso {
+  display: flex;
+  gap: var(--e-3);
+  padding: var(--e-4);
+  border-radius: var(--radio-md);
+  font-size: var(--txt-menor);
+  line-height: 1.5;
+}
+.aviso--info { background: var(--azul-100); color: #1B3F8F; }
+.aviso--ok { background: var(--menta-100); color: #0F6B41; }
+.aviso--ojo { background: var(--amarillo-100); color: #7A5200; }
+.aviso--api { background: var(--morado-050); color: var(--morado-700); box-shadow: inset 0 0 0 1.5px var(--morado-100); }
+.aviso__icono { flex: none; }
+
+/* ------------------------------------------------------------ Etiquetas --- */
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radio-pill);
+  font-size: var(--txt-micro);
+  font-weight: var(--peso-fuerte);
+}
+.etiqueta--include { background: var(--morado-100); color: var(--morado-700); }
+.etiqueta--extend  { background: var(--amarillo-100); color: #7A5200; }
+.etiqueta--externo { background: var(--naranja-100); color: var(--naranja-600); }
+.etiqueta--neutra  { background: var(--linea); color: var(--tinta-600); }
+
+/* --------------------------------------------------------------- Teclado -- */
+/* Teclado numerico: aparece en el canal telefono y en el terminal. */
+.teclado { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--e-2); }
+.tecla {
+  padding: var(--e-4);
+  border-radius: var(--radio-md);
+  font-size: var(--txt-titulo);
+  font-weight: var(--peso-fuerte);
+  text-align: center;
+  transition: background var(--paso);
+}
+.tecla:hover { background: var(--linea); }
+
+/* Puntos del codigo OTP / clave */
+.puntos { display: flex; gap: var(--e-3); justify-content: center; }
+.punto {
+  width: 46px; height: 56px;
+  border-radius: var(--radio-md);
+  background: var(--papel);
+  box-shadow: inset 0 0 0 1.5px var(--linea);
+  display: grid; place-items: center;
+  font-size: var(--txt-titulo);
+  font-weight: var(--peso-negro);
+}
+.punto--lleno { box-shadow: inset 0 0 0 1.5px var(--morado-500); color: var(--morado-600); }
+
+/* ------------------------------------------------------------ Comprobante - */
+.comprobante {
+  background: var(--papel);
+  border-radius: var(--radio-lg);
+  padding: var(--e-6) var(--e-5);
+  box-shadow: var(--sombra-md);
+  position: relative;
+}
+.comprobante__sello {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: var(--menta-100);
+  display: grid; place-items: center;
+  margin: 0 auto var(--e-4);
+}
+.comprobante__filas { margin-top: var(--e-5); }
+.comprobante__fila { display: flex; justify-content: space-between; gap: var(--e-4); padding: 9px 0; font-size: var(--txt-menor); }
+.comprobante__fila span:first-child { color: var(--tinta-400); }
+.comprobante__fila span:last-child { font-weight: var(--peso-medio); text-align: right; }
+.comprobante__corte {
+  border-top: 2px dashed var(--linea);
+  margin: var(--e-4) calc(var(--e-5) * -1) 0;
+  padding-top: var(--e-4);
+}
+
+/* --------------------------------------------------------------- Barras --- */
+.progreso { height: 6px; border-radius: var(--radio-pill); background: var(--linea); overflow: hidden; }
+.progreso__relleno { height: 100%; border-radius: var(--radio-pill); background: var(--morado-600); transition: width var(--paso); }
+
+/* Pasos de un flujo (vinculacion, apertura de producto) */
+.pasos { display: flex; align-items: center; gap: 6px; }
+.paso { flex: 1; height: 4px; border-radius: var(--radio-pill); background: var(--linea); }
+.paso--hecho { background: var(--morado-600); }
+.paso--activo { background: var(--morado-300); }
+
+/* --------------------------------------------------------------- Modal ---- */
+.modal {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 43, .45);
+  display: grid;
+  place-items: end center;
+  z-index: 40;
+  animation: entra var(--paso) both;
+}
+.modal__caja {
+  width: 100%;
+  background: var(--papel);
+  border-radius: var(--radio-xl) var(--radio-xl) 0 0;
+  padding: var(--e-6) var(--e-5) var(--e-8);
+  max-height: 88%;
+  overflow-y: auto;
+}
+.modal__asa { width: 44px; height: 4px; border-radius: var(--radio-pill); background: var(--tinta-200); margin: 0 auto var(--e-5); }
+
+/* ------------------------------------------------------------ Anotacion --- */
+/* Trazabilidad del prototipo: caso de uso, capa, entidad y actor externo.
+   Solo visible en MODO ANOTADO — asi el mismo prototipo sirve para capturar
+   pantallas limpias y para sustentar la trazabilidad al punto 1 y al punto 3. */
+.anotacion { display: none; }
+.anotado .anotacion { display: block; }
+
+.anotacion__cinta {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background: var(--tinta-900);
+  color: #fff;
+  padding: 9px var(--e-4);
+  font-size: var(--txt-micro);
+  display: flex;
+  gap: var(--e-3);
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 30;
+}
+.anotacion__dato { display: inline-flex; align-items: center; gap: 5px; }
+.anotacion__clave { color: var(--tinta-400); }
+.anotacion__valor { font-weight: var(--peso-fuerte); }
+.anotacion__valor--capa { color: var(--morado-300); }
+.anotacion__valor--caso { color: var(--menta-500); }
+.anotacion__valor--entidad { font-family: var(--fuente-mono); color: var(--amarillo-500); }
+.anotacion__valor--externo { color: var(--naranja-500); }
+
+/* --------------------------------------------------------- Pantalla error - */
+.error-pantalla {
+  padding: var(--e-8) var(--e-5);
+  text-align: center;
+}
+.error-pantalla__codigo {
+  font-family: var(--fuente-mono);
+  background: var(--error-100);
+  color: var(--error);
+  padding: var(--e-3);
+  border-radius: var(--radio-sm);
+  margin-top: var(--e-4);
+  font-size: var(--txt-menor);
+  word-break: break-all;
+}
+
+/* ------------------------------------------------------- Barra de estado -- */
+.estado-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px var(--e-6) 4px;
+  font-size: var(--txt-menor);
+  font-weight: var(--peso-fuerte);
+  color: var(--tinta-900);
+  flex: none;
+}
+.estado-barra__iconos { display: flex; gap: 5px; align-items: center; }
+
+/* ------------------------------------------------------------- Cabecera --- */
+.cabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  padding: var(--e-3) var(--e-5);
+  flex: none;
+}
+.cabecera__volver {
+  width: 38px; height: 38px;
+  border-radius: 13px;
+  background: var(--papel);
+  box-shadow: var(--sombra-sm);
+  display: grid; place-items: center;
+  flex: none;
+}
+.cabecera__titulo { font-size: var(--txt-seccion); font-weight: var(--peso-fuerte); flex: 1; min-width: 0; }
+.cabecera__avatar {
+  width: 40px; height: 40px; border-radius: 14px;
+  background: var(--grad-morado);
+  display: grid; place-items: center;
+  color: #fff; font-weight: var(--peso-negro); font-size: var(--txt-menor);
+  flex: none;
+}

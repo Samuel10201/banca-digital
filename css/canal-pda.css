@@ -1,0 +1,168 @@
+/* ============================================================================
+   canal-pda.css — CANAL 3: terminal dedicado apaisado (app-pda).
+   Mismas pantallas, tercera composicion: pantalla tactil de 1024x600 usada de
+   pie en un corresponsal o en una oficina. Manda el DEDO, no el raton:
+   objetivos tactiles grandes, tipografia mayor y menos densidad por pantalla.
+   ============================================================================ */
+
+/* ------------------------------------------------------ Marco del aparato - */
+.dispositivo--pda {
+  position: relative;
+  width: min(1120px, 96vw);
+  background: #14142B;
+  border-radius: 34px;
+  padding: 26px 22px;
+  box-shadow: var(--sombra-lg);
+}
+.dispositivo--pda .lienzo {
+  position: relative;
+  width: 100%;
+  height: min(var(--pda-alto), 74vh);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--fondo);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pie del terminal: lector de tarjeta y altavoz, para que se lea como un
+   aparato de atencion y no como una tableta. */
+.pda-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 10px 0;
+  color: rgba(255, 255, 255, .35);
+  font-size: var(--txt-micro);
+  letter-spacing: .4px;
+}
+.pda-pie__ranura {
+  width: 132px; height: 6px;
+  border-radius: var(--radio-pill);
+  background: rgba(255, 255, 255, .16);
+}
+
+/* Barra superior del terminal: identifica el punto de atencion. */
+.pda-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--e-3) var(--e-6);
+  background: var(--tinta-900);
+  color: #fff;
+  font-size: var(--txt-menor);
+  flex: none;
+}
+.pda-barra__marca { display: flex; align-items: center; gap: var(--e-3); font-weight: var(--peso-fuerte); }
+.pda-barra__estado { display: flex; align-items: center; gap: var(--e-4); color: var(--tinta-400); }
+.pda-barra__punto { display: inline-flex; align-items: center; gap: 6px; }
+.pda-barra__led { width: 8px; height: 8px; border-radius: 50%; background: var(--menta-500); }
+
+/* ------------------------------------------------------------- Estructura - */
+.pda-marco {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 168px 1fr;
+}
+
+/* -------------------------------------------------- Riel de navegacion ---- */
+/* Vertical y ancho: en un terminal de pie el dedo llega mejor al costado que
+   al borde inferior, y el pulgar no cubre el contenido. */
+.nav--pda {
+  background: var(--papel);
+  border-right: 1px solid var(--linea);
+  padding: var(--e-4) var(--e-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-2);
+}
+.nav--pda .nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-2);
+  padding: var(--e-4) var(--e-2);
+  border-radius: var(--radio-md);
+  color: var(--tinta-400);
+  transition: all var(--paso);
+  min-height: 78px;
+}
+.nav--pda .nav__item[aria-current="page"] { background: var(--morado-100); color: var(--morado-700); }
+.nav--pda .nav__texto { font-size: var(--txt-micro); font-weight: var(--peso-fuerte); text-align: center; }
+/* Igual que en web: la accion principal se recoloca al pie del riel. */
+.nav--pda .nav__item { order: 1; }
+.nav--pda .nav__central {
+  order: 9;
+  margin-top: auto;
+  padding: var(--e-4);
+  border-radius: var(--radio-md);
+  background: var(--morado-600);
+  color: #fff;
+  display: grid; place-items: center;
+  min-height: 66px;
+  box-shadow: var(--sombra-acento);
+}
+
+/* --------------------------------------------------------- Area principal - */
+.pda-principal { display: flex; flex-direction: column; min-height: 0; }
+
+.dispositivo--pda .cabecera { padding: var(--e-4) var(--e-6) var(--e-2); }
+.dispositivo--pda .cabecera__volver { width: 46px; height: 46px; border-radius: var(--radio-md); }
+.dispositivo--pda .cabecera__titulo { font-size: var(--txt-titulo); }
+
+/* Dos columnas anchas, con mas aire vertical que en web. */
+.dispositivo--pda .cuerpo {
+  flex: 1;
+  min-height: 0;
+  padding: var(--e-3) var(--e-6) calc(var(--e-6) + var(--alto-cinta));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--e-4) var(--e-6);
+  align-content: start;
+}
+.dispositivo--pda .bloque { grid-column: 1 / -1; }
+.dispositivo--pda .bloque--figura { grid-column: 1; }
+.dispositivo--pda .bloque--figura + .bloque--texto { grid-column: 2; align-self: center; }
+.dispositivo--pda .bloque--figura .ilustracion { min-height: 200px; }
+.dispositivo--pda .bloque--destacado { grid-column: 1; }
+.dispositivo--pda .bloque--destacado + .bloque--accesos { grid-column: 2; align-self: center; }
+.dispositivo--pda .bloque--seccion { grid-column: auto; }
+.dispositivo--pda .bloque--codigo { grid-column: 1; align-self: center; }
+.dispositivo--pda .bloque--codigo + .bloque--teclado { grid-column: 2; }
+.dispositivo--pda .bloque--rejilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--e-4); }
+
+.dispositivo--pda .bloque--formulario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--e-6);
+}
+.dispositivo--pda .bloque--formulario .campo--monto { grid-column: 1 / -1; }
+
+/* TODO objetivo tactil crece: es la unica diferencia real de este canal. */
+.dispositivo--pda .boton { padding: 18px var(--e-8); font-size: var(--txt-seccion); }
+.dispositivo--pda .campo__caja { padding: 18px var(--e-5); }
+.dispositivo--pda .opcion { padding: var(--e-4) var(--e-3); font-size: var(--txt-cuerpo); min-width: 118px; }
+.dispositivo--pda .lista__item { padding: var(--e-4) 0; }
+.dispositivo--pda .lista__icono { width: 50px; height: 50px; border-radius: var(--radio-md); }
+.dispositivo--pda .lista__titulo { font-size: var(--txt-seccion); }
+.dispositivo--pda .chip__icono { width: 62px; height: 62px; border-radius: 20px; }
+.dispositivo--pda .chip__texto { font-size: var(--txt-menor); }
+.dispositivo--pda .tecla { padding: var(--e-5); font-size: 26px; }
+.dispositivo--pda .punto { width: 58px; height: 68px; }
+.dispositivo--pda .accesos .chips { gap: var(--e-4); }
+
+.dispositivo--pda .bloque--acciones { justify-content: flex-end; }
+.dispositivo--pda .bloque--acciones .boton { flex: none; min-width: 230px; }
+
+/* En el terminal el contrato se lee de pie: menos alto, letra mas grande. */
+.dispositivo--pda .bloque--contrato .tarjeta { max-height: 210px; font-size: var(--txt-cuerpo); }
+.dispositivo--pda .bloque--contrato .menor { font-size: var(--txt-cuerpo); }
+
+/* El terminal es un punto de atencion presencial: no muestra el perfil ni la
+   configuracion personal del cliente. Se declara en el README, no se esconde
+   por descuido. */
+.dispositivo--pda .nav__item[data-raiz="perfil"] { display: none; }
+
+.dispositivo--pda .anotacion__cinta { border-radius: 0 0 16px 16px; }

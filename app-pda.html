@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>app-pda — Banca Digital</title>
+  <!--
+    CANAL 3 de 3 — app-pda.
+    SHELL: ni una pantalla propia. Terminal dedicado apaisado (corresponsal u
+    oficina), operado de pie y con el dedo. Lo unico propio es canal-pda.css,
+    que agranda todo objetivo tactil y reparte el contenido en dos columnas.
+  -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/canal-pda.css">
+</head>
+<body class="escritorio">
+
+  <aside class="consola" id="consola"></aside>
+
+  <main class="dispositivo dispositivo--pda" data-canal="pda" data-inicio="inicio">
+    <div class="lienzo">
+
+      <div class="pda-barra">
+        <span class="pda-barra__marca">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20z"/></svg>
+          Banca Digital — Terminal
+        </span>
+        <span class="pda-barra__estado">
+          <span class="pda-barra__punto">PDA-0417 · Corresponsal Norte</span>
+          <span class="pda-barra__punto"><span class="pda-barra__led"></span> En linea</span>
+          <span class="pda-barra__punto">9:41</span>
+        </span>
+      </div>
+
+      <div class="pda-marco">
+        <nav class="nav nav--pda" id="nav"></nav>
+        <section class="pda-principal">
+          <header class="cabecera" id="cabecera"></header>
+          <div class="cuerpo scroll" id="cuerpo"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="pda-pie">
+      <span>LECTOR DE TARJETA</span>
+      <span class="pda-pie__ranura"></span>
+      <span>NFC · QR</span>
+    </div>
+  </main>
+
+  <script src="js/datos.js"></script>
+  <script src="js/pantallas.js"></script>
+  <script src="js/navegacion.js"></script>
+  <script>
+    // El terminal lleva la accion principal al pie del riel, donde el dedo la
+    // alcanza sin cruzar la pantalla.
+    document.addEventListener('DOMContentLoaded', function () {
+      montarNavegacion('nav', true);
+      montarConsola('pda');
+    });
+  </script>
+</body>
+</html>
