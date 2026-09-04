@@ -8,7 +8,8 @@
 /* ------------------------------------------------------ Marco del aparato - */
 .dispositivo--pda {
   position: relative;
-  width: min(1120px, 96vw);
+  container-type: inline-size;   /* el layout responde al ancho DEL CANAL */
+  width: min(1120px, 100%);
   background: #14142B;
   border-radius: 34px;
   padding: 26px 22px;
@@ -106,7 +107,7 @@
 }
 
 /* --------------------------------------------------------- Area principal - */
-.pda-principal { display: flex; flex-direction: column; min-height: 0; }
+.pda-principal { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
 
 .dispositivo--pda .cabecera { padding: var(--e-4) var(--e-6) var(--e-2); }
 .dispositivo--pda .cabecera__volver { width: 46px; height: 46px; border-radius: var(--radio-md); }
@@ -166,3 +167,25 @@
 .dispositivo--pda .nav__item[data-raiz="perfil"] { display: none; }
 
 .dispositivo--pda .anotacion__cinta { border-radius: 0 0 16px 16px; }
+
+/* ---------------------------------------------- Terminal estrecho -------- */
+/* Un terminal de atencion no se estrecha en la vida real, pero el prototipo se
+   mira en ventanas de cualquier tamano: si el canal se angosta, se reacomoda
+   en vez de recortarse. */
+@container (max-width: 860px) {
+  .pda-marco { grid-template-columns: 116px 1fr; }
+  .nav--pda .nav__item { min-height: 62px; padding: var(--e-3) var(--e-1); }
+  .dispositivo--pda .cuerpo { grid-template-columns: 1fr; }
+  .dispositivo--pda .bloque,
+  .dispositivo--pda .bloque--figura,
+  .dispositivo--pda .bloque--figura + .bloque--texto,
+  .dispositivo--pda .bloque--destacado,
+  .dispositivo--pda .bloque--destacado + .bloque--accesos,
+  .dispositivo--pda .bloque--codigo,
+  .dispositivo--pda .bloque--codigo + .bloque--teclado,
+  .dispositivo--pda .bloque--seccion { grid-column: 1; }
+  .dispositivo--pda .bloque--formulario { grid-template-columns: 1fr; }
+  .dispositivo--pda .bloque--rejilla { grid-template-columns: 1fr; }
+  .dispositivo--pda .bloque--acciones .boton { flex: 1; min-width: 0; }
+  .pda-barra__estado .pda-barra__punto:first-child { display: none; }
+}

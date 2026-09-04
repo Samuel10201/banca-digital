@@ -8,7 +8,12 @@
 .dispositivo--phone {
   position: relative;
   width: var(--phone-ancho);
-  height: var(--phone-alto);
+  max-width: 100%;
+  /* Si la ventana es mas baja que el aparato, el aparato se acorta y el
+     contenido sigue haciendo scroll dentro. Sin esto se ve medio telefono y la
+     otra mitad queda fuera de alcance. */
+  height: min(var(--phone-alto), calc(100vh - var(--e-12)));
+  min-height: 520px;
   background: #14142B;
   border-radius: 54px;
   padding: 12px;

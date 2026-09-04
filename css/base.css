@@ -19,14 +19,18 @@ html, body {
 body.escritorio {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
   padding: var(--e-8) var(--e-4);
+  overflow: auto;
   background:
     radial-gradient(900px 520px at 12% -8%, var(--morado-100) 0%, transparent 62%),
     radial-gradient(760px 480px at 92% 4%, var(--naranja-100) 0%, transparent 58%),
     var(--fondo);
 }
+
+/* El centrado va aqui, con margin auto, y NO con justify/align center en el
+   contenedor: con centrado por flex, lo que se desborda queda inaccesible
+   porque el scroll no alcanza el borde izquierdo ni el superior. */
+body.escritorio > .dispositivo { margin: auto; }
 
 h1, h2, h3, h4, p, figure { margin: 0; }
 ul, ol { margin: 0; padding: 0; list-style: none; }

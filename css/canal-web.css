@@ -7,8 +7,10 @@
 /* ------------------------------------------------- Marco del navegador ---- */
 .dispositivo--web {
   position: relative;
-  width: min(1240px, 96vw);
+  container-type: inline-size;   /* el layout responde al ancho DEL CANAL */
+  width: min(1240px, 100%);
   height: min(800px, 90vh);
+  min-height: 460px;
   background: var(--papel);
   border-radius: var(--radio-lg);
   box-shadow: var(--sombra-lg);
@@ -63,6 +65,11 @@
   flex-direction: column;
   gap: var(--e-1);
   overflow-y: auto;
+}
+.nav--web .nav__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
 }
 .nav--web .nav__item {
   display: flex;
@@ -119,7 +126,7 @@
 .marca-web__texto { font-weight: var(--peso-negro); letter-spacing: -.3px; }
 
 /* --------------------------------------------------------- Area principal - */
-.web-principal { display: flex; flex-direction: column; min-height: 0; }
+.web-principal { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
 
 .dispositivo--web .cabecera {
   padding: var(--e-5) var(--e-8) var(--e-3);
@@ -186,3 +193,50 @@
 
 /* La cinta de anotacion se ancla al pie del navegador. */
 .dispositivo--web .anotacion__cinta { border-radius: 0 0 var(--radio-lg) var(--radio-lg); }
+
+/* ------------------------------------------------- Canal web estrecho ----- */
+/* Se mide el ancho DEL CANAL, no el de la ventana: el navegador simulado puede
+   ser estrecho dentro de una pantalla grande, y es su ancho el que manda. */
+@container (max-width: 940px) {
+  /* Menu lateral -> barra superior desplazable. */
+  .web-marco { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .nav--web {
+    padding: var(--e-3) var(--e-4);
+    border-right: 0;
+    border-bottom: 1px solid var(--linea);
+    overflow: visible;
+  }
+  .nav--web .nav__lista {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--e-2);
+  }
+  .nav--web .nav__item { width: auto; flex: none; padding: var(--e-2) var(--e-3); }
+  .nav--web .nav__central { margin-top: 0; padding: var(--e-2) var(--e-4); flex: none; }
+  .marca-web { display: none; }
+
+  /* Una sola columna: los pares lado a lado dejan de caber. */
+  .dispositivo--web .cuerpo {
+    grid-template-columns: 1fr;
+    padding: var(--e-5) var(--e-5) var(--e-8);
+  }
+  .dispositivo--web .bloque,
+  .dispositivo--web .bloque--figura,
+  .dispositivo--web .bloque--figura + .bloque--texto,
+  .dispositivo--web .bloque--destacado,
+  .dispositivo--web .bloque--destacado + .bloque--accesos,
+  .dispositivo--web .bloque--seccion { grid-column: 1; }
+  .dispositivo--web .bloque--formulario { grid-template-columns: 1fr; }
+  .dispositivo--web .bloque--rejilla { grid-template-columns: 1fr; }
+  .dispositivo--web .cabecera { padding: var(--e-4) var(--e-5) var(--e-2); }
+  .dispositivo--web .bloque--acciones .boton { flex: 1; min-width: 0; }
+}
+
+@container (max-width: 620px) {
+  /* Tan estrecho como un telefono: los accesos bajan a cuatro por fila y el
+     cromo del navegador se simplifica. */
+  .dispositivo--web .bloque--accesos .chips { grid-template-columns: repeat(4, 1fr); gap: var(--e-3); }
+  .cromo__url { max-width: none; font-size: var(--txt-micro); }
+  .cromo__acciones { display: none; }
+}
